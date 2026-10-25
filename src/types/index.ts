@@ -1,0 +1,10 @@
+export type PaymentStatus = 'PAID' | 'PENDING' | 'UPCOMING' | 'DUE TODAY' | 'OVERDUE';
+export interface Student { studentId:string; fullName:string; email:string; phone:string; propertyId:string; floor:string; roomId:string; roomNumber?:string; bedId:string; monthlyRent:number; dueDate:string; paymentStatus:string; reminderStatus?:string; moveInDate:string; notes:string; lastReminder:string; active:boolean; propertyName?:string; roomName?:string; bedName?:string; }
+export interface Property { propertyId:string; name:string; address:string; city:string; floorCount:number; status:string; active:boolean; ownerName?:string; phone?:string; email?:string; notes?:string; roomCount?:number; bedCount?:number; occupiedBeds?:number; vacantBeds?:number; }
+export interface Room { roomId:string; propertyId:string; floor:string; roomNumber:string; roomType:string; capacity:number; rent:number; status:string; active:boolean; }
+export interface Bed { bedId:string; propertyId:string; roomId:string; roomNumber?:string; bedNumber:string; status:'OCCUPIED'|'VACANT'; studentId:string; monthlyRent:number; active:boolean; }
+export interface DashboardStats { totalStudents:number; totalPaid:number; pendingPayments:number; dueToday:number; overduePayments:number; totalProperties:number; totalRooms:number; totalBeds:number; occupiedBeds:number; vacantBeds:number; monthlyRent:number; collectedRent:number; outstandingRent:number; recentStudents:Student[]; upcomingPayments:Student[]; occupancy:Property[]; recentActivity:AutomationLog[]; }
+export interface AutomationLog { logId:string; timestamp:string; action:string; status:string; message:string; studentId:string; name?:string; email?:string; reminder?:string; type?:string; details?:string; }
+export interface AppSettings { pgName:string; reminderDate:string; ownerEmail:string; }
+export interface ApiResponse<T> { success:boolean; data?:T; error?:string; }
+export interface PropertyDetails { property:Property; rooms:Room[]; beds:Bed[]; students:Student[]; }

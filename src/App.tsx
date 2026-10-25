@@ -1,0 +1,2 @@
+import { Navigate, Route, Routes } from 'react-router-dom'; import AppShell from './components/layout/app-shell'; import DashboardPage from './routes/dashboard'; import StudentsPage from './routes/students'; import PropertiesPage from './routes/properties';
+export default function App(){return <Routes><Route element={<AppShell/>}><Route index element={<DashboardPage/>}/><Route path="students" element={<StudentsPage/>}/><Route path="properties" element={<PropertiesPage/>}/><Route path="*" element={<Navigate to="/" replace/>}/></Route></Routes>}
