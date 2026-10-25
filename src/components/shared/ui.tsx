@@ -2,7 +2,19 @@ import type { ReactNode, ButtonHTMLAttributes, ElementType } from 'react'; impor
 export function Button({children,className,variant='primary',...props}:ButtonHTMLAttributes<HTMLButtonElement>&{variant?:'primary'|'secondary'|'ghost'|'danger'}){return <button className={cn('btn',`btn-${variant}`,className)} {...props}>{children}</button>}
 export function Card({children,className}:{children:ReactNode;className?:string}){return <section className={cn('card',className)}>{children}</section>}
 export function MetricCard({label,value,icon:Icon,detail}:{label:string;value:ReactNode;icon:ElementType;detail?:string}){return <Card><div className="metric-top"><span className="metric-label">{label}</span><span className="metric-icon"><Icon size={18}/></span></div><div className="metric-value">{value}</div>{detail&&<div className="metric-detail">{detail}</div>}</Card>}
-export function StatusBadge({status}:{status:string}){const s=(status||'UNKNOWN').toLowerCase().replaceAll(' ','-');return <span className={`status status-${s}`}>{status||'Unknown'}</span>}
+
+export function StatusBadge({ status }: { status: string }) {
+  const s = (status || "UNKNOWN")
+    .toLowerCase()
+    .replace(/ /g, "-");
+
+  return (
+    <span className={`status status-${s}`}>
+      {status || "Unknown"}
+    </span>
+  );
+}
+
 export function PageLoading(){return <div className="center-state"><LoaderCircle className="spin"/><span>Loading live data…</span></div>}
 export function ErrorState({error,onRetry}:{error:unknown;onRetry:()=>void}){return <div className="state-card error-state"><AlertCircle size={22}/><div><strong>Couldn’t load data</strong><p>{error instanceof Error?error.message:'Unexpected error'}</p><Button variant="secondary" onClick={onRetry}><RefreshCw size={15}/> Try again</Button></div></div>}
 export function EmptyState({title,description,action}:{title:string;description:string;action?:ReactNode}){return <div className="empty-state"><Info size={25}/><strong>{title}</strong><p>{description}</p>{action}</div>}
